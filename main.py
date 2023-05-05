@@ -6,7 +6,7 @@ app = Flask(__name__)
 api = Api(app)
 CORS(app)
 
-from model import get_destination
+
 
 
 class status (Resource):
