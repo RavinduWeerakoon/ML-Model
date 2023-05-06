@@ -20,10 +20,15 @@ class status (Resource):
 class Destination(Resource):
     def get(self, a):
         return jsonify({'data': get_locations(a)})
+    
+class Plan(Resource):
+    def get(self, a):
+        return jsonify({'data':'z7Dd2OYLSB1XHnENED68'})
 
 
 api.add_resource(status, '/')
 api.add_resource(Destination, '/get/<string:a>')
+api.add_resource(Plan, '/plan/<string:a>')
 
 if __name__ == '__main__':
     app.run()
