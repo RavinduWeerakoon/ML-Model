@@ -56,3 +56,5 @@ def rec_lin(user_input, linear=linear):
 def get_locations(prompt):
     words = " ".join(keyword_extractor(prompt))
     return rec_lin(words)
+
+
