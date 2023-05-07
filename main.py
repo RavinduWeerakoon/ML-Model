@@ -27,7 +27,7 @@ class Plan(Resource):
         days = request.args.get('days')
         # do something with the data and days parameters to generate a plan
      
-        return jsonify({'data': "abc"})
+        return jsonify({'data': rec_plan(data, int(days))})
     
 
 
