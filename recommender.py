@@ -57,4 +57,45 @@ def get_locations(prompt):
     words = " ".join(keyword_extractor(prompt))
     return rec_lin(words)
 
+def rec_plan(prompt, days=None):
+    
+    
+    # use fuzzywuzzy to grab the product with name closest to user input
+    extracted = process.extract(prompt, choices, limit=1)
+    destination = extracted[0][0]
+    
+    # Get the index of the product that matches the product name
+    idx = indices[destination]
+
+    # Get the pairwise similarity scores
+    sim_scores = list(enumerate(linear[idx]))
+
+    # Sort the products based on the similarity scores
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+
+    # Get the scores of the 10 most similar products
+    sim_scores = sim_scores[1:11]
+
+    # Get the product indices
+    destination_indices = [i[0] for i in sim_scores]
+
+    # df_return = dataset[["fb_id", "days"]].loc[destination_indices]
+
+   
+
+    # df_return = df_return["fb_id"][df_return["days"]==days]
+    # return df_return.to_list()[0]
+
+    
+    df_return = dataset[["fb_id", "days"]].loc[destination_indices]
+    if days:
+        df_return = df_return[df_return["days"]==days]
+    # Return the top 10 most similar products
+    data = None
+    try:
+        data = df_return['fb_id'].to_list()[0]
+    except:
+        data = 'z7Dd2OYLSB1XHnENED68'
+    return data
+
 

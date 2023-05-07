@@ -1,7 +1,7 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify,request
 from flask_restful import Resource, Api
 from flask_cors import CORS
-from recommender import get_locations
+from recommender import get_locations, rec_plan
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
@@ -22,13 +22,18 @@ class Destination(Resource):
         return jsonify({'data': get_locations(a)})
     
 class Plan(Resource):
-    def get(self, a):
-        return jsonify({'data':'z7Dd2OYLSB1XHnENED68'})
+    def get(self):
+        data = request.args.get('data')
+        days = request.args.get('days')
+        # do something with the data and days parameters to generate a plan
+     
+        return jsonify({'data': "abc"})
+    
 
 
 api.add_resource(status, '/')
 api.add_resource(Destination, '/get/<string:a>')
-api.add_resource(Plan, '/plan/<string:a>')
+api.add_resource(Plan, '/getPlan')
 
 if __name__ == '__main__':
     app.run()
